@@ -1,39 +1,13 @@
-import React from 'react';
-import { Flex, Spin, Switch } from 'antd';
+import React from "react";
+import { Spinner, Stack } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-const Bai6: React.FC = () => {
-  const [auto, setAuto] = React.useState(false);
-  const [percent, setPercent] = React.useState(-50);
-  const timerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
-
-  React.useEffect(() => {
-    timerRef.current = setTimeout(() => {
-      setPercent((v) => {
-        const nextPercent = v + 5;
-        return nextPercent > 150 ? -50 : nextPercent;
-      });
-    }, 100);
-    return () => clearTimeout(timerRef.current!);
-  }, [percent]);
-
-  const mergedPercent = auto ? 'auto' : percent;
-
+export default function Bai6() {
   return (
-    <Flex align="center" gap="middle">
-      <Switch
-        checkedChildren="Auto"
-        unCheckedChildren="Auto"
-        checked={auto}
-        onChange={() => {
-          setAuto(!auto);
-          setPercent(-50);
-        }}
-      />
-      <Spin percent={mergedPercent} style={{ color: 'red' }} />
-      <Spin percent={mergedPercent} style={{ color: 'green' }} />
-      <Spin percent={mergedPercent} style={{ color: 'blue' }} />
-    </Flex>
+    <Stack gap={3} className="align-items-center">
+      <Spinner animation="border" role="status" style={{ color: "#0d6efd" }} />
+      <Spinner animation="border" role="status" variant="secondary" />
+      <Spinner animation="border" role="status" style={{ color: "#22c55e" }} />
+    </Stack>
   );
-};
-
-export default Bai6;
+}
